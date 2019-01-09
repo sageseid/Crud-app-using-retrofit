@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.noel_inc.crudappinterview.R;
-import com.noel_inc.crudappinterview.model.RetroPosts;
+import com.noel_inc.crudappinterview.model.GetPosts;
 
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
 
-    private List<RetroPosts> dataList;
+    private List<GetPosts> dataList;
     private Context context;
 
 
@@ -41,7 +41,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
 
 
 
-    public PostAdapter (List<RetroPosts> dataList, Context context){
+    public PostAdapter (List<GetPosts> dataList, Context context){
         this.dataList = dataList;
         this.context = context;
     }

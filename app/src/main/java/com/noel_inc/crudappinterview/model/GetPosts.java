@@ -3,7 +3,7 @@ package com.noel_inc.crudappinterview.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RetroPosts {
+public class GetPosts {
 
     @SerializedName("userId")
     @Expose

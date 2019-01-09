@@ -1,17 +1,19 @@
-package com.noel_inc.crudappinterview;
+package com.noel_inc.crudappinterview.activities;
 
 import android.app.ProgressDialog;
-import android.content.ClipData;
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
 
 
+import com.noel_inc.crudappinterview.R;
 import com.noel_inc.crudappinterview.adapter.PostAdapter;
-import com.noel_inc.crudappinterview.model.RetroPosts;
+import com.noel_inc.crudappinterview.model.GetPosts;
 import com.noel_inc.crudappinterview.network.ApiUtils;
 import com.noel_inc.crudappinterview.network.GetpostService;
 
@@ -22,7 +24,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static java.security.AccessController.doPrivileged;
-import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog progressDoalog;
     private GetpostService mService;
 
+    FloatingActionButton fab;
+
     @Override
     protected void onCreate (Bundle savedInstanceState)  {
         super.onCreate( savedInstanceState);
@@ -38,6 +41,15 @@ public class MainActivity extends AppCompatActivity {
 
 
         mService = ApiUtils.getPostService();
+
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(),AddPostActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -51,15 +63,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void loadAnswers() {
-        mService.getAllPosts().enqueue(new Callback<List<RetroPosts>>() {
+        mService.getAllPosts().enqueue(new Callback<List<GetPosts>>() {
             @Override
-            public void onResponse(Call<List<RetroPosts>> call, Response<List<RetroPosts>> response) {
+            public void onResponse(Call<List<GetPosts>> call, Response<List<GetPosts>> response) {
 
                 if(response.isSuccessful()) {
 
                     progressDoalog.dismiss();
 
-                    List<RetroPosts> postsX = response.body();
+                    List<GetPosts> postsX = response.body();
                     recyclerView = findViewById(R.id.post_recycler_view);
                     adapter = new PostAdapter(postsX, getBaseContext());
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
@@ -74,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<RetroPosts>> call, Throwable t) {
+            public void onFailure(Call<List<GetPosts>> call, Throwable t) {
 
             }
         });
