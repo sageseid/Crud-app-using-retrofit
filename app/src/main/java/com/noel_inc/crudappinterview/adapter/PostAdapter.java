@@ -1,6 +1,7 @@
 package com.noel_inc.crudappinterview.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.noel_inc.crudappinterview.R;
+import com.noel_inc.crudappinterview.activities.UpdatePostActivity;
 import com.noel_inc.crudappinterview.model.GetPosts;
 
 import java.util.List;
@@ -35,6 +37,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
 
         @Override
         public void onClick(View view) {
+
+            int itemPosition = getAdapterPosition();
+           GetPosts intentpost   = dataList.get(itemPosition);
+            Intent intent = new Intent(view.getContext(), UpdatePostActivity.class);
+            intent.putExtra("postTitleDetails",intentpost.getTitle());
+            intent.putExtra("postBodyDetails",intentpost.getBody());
+            view.getContext().startActivity(intent);
 
         }
     }
