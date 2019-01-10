@@ -92,7 +92,7 @@ public class UpdatePostActivity  extends AppCompatActivity {
 
 
 
-                    showResponse(response.body().toString());
+                    showResponse(String.valueOf(response.body()));
                     Log.e("TAG", "update submitted to API." );
                     progressDoalog.dismiss();
 

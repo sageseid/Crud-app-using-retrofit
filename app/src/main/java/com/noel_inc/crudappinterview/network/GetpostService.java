@@ -20,6 +20,6 @@ public interface GetpostService {
     @POST("posts")
     Call<Post> savePost(@Body Post post);
 
-    @PUT("posts")
+    @PUT("posts/1")
     Call<Update> savePost(@Body Update update);
 }
