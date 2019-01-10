@@ -43,6 +43,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
             Intent intent = new Intent(view.getContext(), UpdatePostActivity.class);
             intent.putExtra("postTitleDetails",intentpost.getTitle());
             intent.putExtra("postBodyDetails",intentpost.getBody());
+            intent.putExtra("postIdDetails",intentpost.getId().toString());
             view.getContext().startActivity(intent);
 
         }

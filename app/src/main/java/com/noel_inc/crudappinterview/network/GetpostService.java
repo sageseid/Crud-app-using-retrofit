@@ -8,9 +8,11 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface GetpostService {
 
@@ -20,6 +22,10 @@ public interface GetpostService {
     @POST("posts")
     Call<Post> savePost(@Body Post post);
 
-    @PUT("posts/1")
-    Call<Update> savePost(@Body Update update);
+    @PUT("posts/{post_id}")
+    Call<Update> savePost(@Body Update update , @Path("post_id") String post_id );
+
+
+
+
 }

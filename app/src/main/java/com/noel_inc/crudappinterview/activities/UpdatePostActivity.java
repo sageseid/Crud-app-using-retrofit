@@ -30,6 +30,7 @@ public class UpdatePostActivity  extends AppCompatActivity {
     Update update;
     private TextView mResponseTv;
     private GetpostService mAPIService;
+    private String sessionId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class UpdatePostActivity  extends AppCompatActivity {
 
         String sessionTitle= getIntent().getStringExtra("postTitleDetails");
         String sessionBody= getIntent().getStringExtra("postBodyDetails");
+        sessionId = getIntent().getStringExtra("postIdDetails");
 
 
         titleEt.setText(sessionTitle);
@@ -86,7 +88,7 @@ public class UpdatePostActivity  extends AppCompatActivity {
 
 
     public void sendUpdate(Update update) {
-        mAPIService.savePost(update).enqueue(new Callback<Update>() {
+        mAPIService.savePost(update , sessionId).enqueue(new Callback<Update>() {
             @Override
             public void onResponse(Call<Update> call, Response<Update> response) {
 
