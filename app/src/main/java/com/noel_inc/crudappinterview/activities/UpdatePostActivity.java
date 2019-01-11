@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.noel_inc.crudappinterview.R;
-import com.noel_inc.crudappinterview.model.Post;
 import com.noel_inc.crudappinterview.model.Update;
 import com.noel_inc.crudappinterview.network.ApiUtils;
 import com.noel_inc.crudappinterview.network.GetpostService;
@@ -35,11 +34,12 @@ public class UpdatePostActivity  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_update_post);
+        setContentView(R.layout.update_post);
 
         final EditText titleEt =  findViewById(R.id.et_title);
         final EditText bodyEt = findViewById(R.id.et_body);
         Button submitBtn = findViewById(R.id.btn_submit);
+        Button deleteBtn = findViewById(R.id.btn_delete);
         mResponseTv = (TextView) findViewById(R.id.tv_response);
         submitBtn.setText("Update");
 
@@ -55,6 +55,17 @@ public class UpdatePostActivity  extends AppCompatActivity {
         mAPIService = ApiUtils.getPostService();
 
 
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                progressDoalog = new ProgressDialog(UpdatePostActivity.this);
+                progressDoalog.setMessage("Loading....");
+                progressDoalog.show();
+
+                deletepost();
+            }
+        });
 
 
 
@@ -95,17 +106,42 @@ public class UpdatePostActivity  extends AppCompatActivity {
 
 
                     showResponse(String.valueOf(response.body()));
-                    Log.e("TAG", "update submitted to API." );
+                    Log.d("TAG", "update submitted to API." );
                     progressDoalog.dismiss();
 
             }
 
             @Override
             public void onFailure(Call<Update> call, Throwable t) {
-                Log.e("TAG", "Unable to update post to API.");
+                Log.d("TAG", "Unable to update post to API.");
             }
         });
     }
+
+
+
+    public void deletepost(){
+
+        mAPIService.deletePost(sessionId).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                Log.d("TAG", "posts deleted from API." );
+                progressDoalog.dismiss();
+
+                Intent intent = new Intent(getBaseContext(),MainActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+                Log.d("TAG", "Unable to delete post to API.");
+            }
+        });
+    }
+
+
 
     public void showResponse(String response) {
         if(mResponseTv.getVisibility() == View.GONE) {
@@ -113,5 +149,4 @@ public class UpdatePostActivity  extends AppCompatActivity {
         }
         mResponseTv.setText(response);
     }
-
 }

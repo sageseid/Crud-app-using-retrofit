@@ -10,7 +10,7 @@
     android:paddingRight="25dp"
     android:paddingTop="25dp"
     android:paddingBottom="25dp"
-  >
+    >
 
     <TextView
         android:layout_width="match_parent"
@@ -40,6 +40,15 @@
         android:background="@color/colorAccent"
         android:textColor="@android:color/white"
         android:text="Submit"/>
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_marginTop="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:textColor="@android:color/white"
+        android:text="Delete"/>
 
     <TextView
         android:id="@+id/tv_response"

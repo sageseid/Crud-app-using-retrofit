@@ -31,7 +31,7 @@ public class AddPostActivity  extends AppCompatActivity {
     @Override
     protected void onCreate (Bundle savedInstanceState)  {
         super.onCreate( savedInstanceState);
-        setContentView(R.layout.add_update_post);
+        setContentView(R.layout.add_post);
         final EditText titleEt =  findViewById(R.id.et_title);
         final EditText bodyEt = findViewById(R.id.et_body);
         Button submitBtn = findViewById(R.id.btn_submit);
@@ -68,13 +68,13 @@ public class AddPostActivity  extends AppCompatActivity {
 
                 if(response.isSuccessful()) {
                     showResponse(response.body().toString());
-                    Log.i("TAG", "post submitted to API." + response.body().toString());
+                    Log.d("TAG", "post submitted to API." + response.body().toString());
                 }
             }
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
-                Log.e("TAG", "Unable to submit post to API.");
+                Log.d("TAG", "Unable to submit post to API.");
             }
         });
     }

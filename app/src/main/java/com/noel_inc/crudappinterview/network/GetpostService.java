@@ -25,6 +25,9 @@ public interface GetpostService {
     @PUT("posts/{post_id}")
     Call<Update> savePost(@Body Update update , @Path("post_id") String post_id );
 
+    @DELETE("posts/{post_id}")
+    Call<Void> deletePost(@Path("post_id") String post_id);
+
 
 
 
